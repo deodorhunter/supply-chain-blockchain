@@ -13,18 +13,18 @@ function json_ccp {
         -e "s/\${CAPORT}/$4/" \
         -e "s#\${PEERPEM}#$PP#" \
         -e "s#\${CAPEM}#$CP#" \
-        ./connections/ccp-template.json 
+        ./connections/ccp-template.json
 }
 
 
-ORG=producer
-ORGMSP=Producer
+ORG=producer1
+ORGMSP=Producer1
 P0PORT=7051
 CAPORT=7054
-PEERPEM=./supply-network/crypto-config/peerOrganizations/producer.example.com/tlsca/tlsca.producer.example.com-cert.pem
-CAPEM=./supply-network/crypto-config/peerOrganizations/producer.example.com/ca/ca.producer.example.com-cert.pem
+PEERPEM=./supply-network/crypto-config/peerOrganizations/producer1.example.com/tlsca/tlsca.producer1.example.com-cert.pem
+CAPEM=./supply-network/crypto-config/peerOrganizations/producer1.example.com/ca/ca.producer1.example.com-cert.pem
 
-echo "$(json_ccp $ORG $ORGMSP $P0PORT $CAPORT $PEERPEM $CAPEM)" > ./connections/connection-producer.json
+echo "$(json_ccp $ORG $ORGMSP $P0PORT $CAPORT $PEERPEM $CAPEM)" > ./connections/connection-producer1.json
 
 ORG=manufacturer
 ORGMSP=Manufacturer
@@ -34,14 +34,14 @@ PEERPEM=./supply-network/crypto-config/peerOrganizations/manufacturer.example.co
 CAPEM=./supply-network/crypto-config/peerOrganizations/manufacturer.example.com/ca/ca.manufacturer.example.com-cert.pem
 
 echo "$(json_ccp $ORG $ORGMSP $P0PORT $CAPORT $PEERPEM $CAPEM)" > ./connections/connection-manufacturer.json
-ORG=deliverer
-ORGMSP=Deliverer
+ORG=producer2
+ORGMSP=Producer2
 P0PORT=10051
 CAPORT=9054
-PEERPEM=./supply-network/crypto-config/peerOrganizations/deliverer.example.com/tlsca/tlsca.deliverer.example.com-cert.pem
-CAPEM=./supply-network/crypto-config/peerOrganizations/deliverer.example.com/ca/ca.deliverer.example.com-cert.pem
+PEERPEM=./supply-network/crypto-config/peerOrganizations/producer2.example.com/tlsca/tlsca.producer2.example.com-cert.pem
+CAPEM=./supply-network/crypto-config/peerOrganizations/producer2.example.com/ca/ca.producer2.example.com-cert.pem
 
-echo "$(json_ccp $ORG $ORGMSP $P0PORT $CAPORT $PEERPEM $CAPEM)" > ./connections/connection-deliverer.json
+echo "$(json_ccp $ORG $ORGMSP $P0PORT $CAPORT $PEERPEM $CAPEM)" > ./connections/connection-producer2.json
 
 ORG=retailer
 ORGMSP=Retailer

@@ -20,20 +20,20 @@ Organizations:
                 Type: Signature
                 Rule: "OR('OrdererMSP.admin')"
 
-    - &Producer
-        Name: ProducerMSP
-        ID: ProducerMSP
-        MSPDir: crypto-config/peerOrganizations/producer.example.com/msp
+    - &Producer1
+        Name: Producer1MSP
+        ID: Producer1MSP
+        MSPDir: crypto-config/peerOrganizations/producer1.example.com/msp
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('ProducerMSP.admin', 'ProducerMSP.peer', 'ProducerMSP.client')"
+                Rule: "OR('Producer1MSP.admin', 'Producer1MSP.peer', 'Producer1MSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('ProducerMSP.admin', 'ProducerMSP.client')"
+                Rule: "OR('Producer1MSP.admin', 'Producer1MSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('ProducerMSP.admin')"
+                Rule: "OR('Producer1MSP.admin')"
 
     - &Manufacturer
         Name: ManufacturerMSP
@@ -49,22 +49,22 @@ Organizations:
             Admins:
                 Type: Signature
                 Rule: "OR('ManufacturerMSP.admin')"
-                
-    - &Deliverer
-        Name: DelivererMSP
-        ID: DelivererMSP
-        MSPDir: crypto-config/peerOrganizations/deliverer.example.com/msp
+
+    - &Producer2
+        Name: Producer2MSP
+        ID: Producer2MSP
+        MSPDir: crypto-config/peerOrganizations/producer2.example.com/msp
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('DelivererMSP.admin', 'DelivererMSP.peer', 'DelivererMSP.client')"
+                Rule: "OR('Producer2MSP.admin', 'Producer2MSP.peer', 'Producer2MSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('DelivererMSP.admin', 'DelivererMSP.client')"
+                Rule: "OR('Producer2MSP.admin', 'Producer2MSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('DelivererMSP.admin')"
-                
+                Rule: "OR('Producer2MSP.admin')"
+
     - &Retailer
         Name: RetailerMSP
         ID: RetailerMSP
@@ -167,9 +167,9 @@ Profiles:
         Consortiums:
             SampleConsortium:
                 Organizations:
-                    - *Producer
+                    - *Producer1
+                    - *Producer2
                     - *Manufacturer
-                    - *Deliverer
                     - *Retailer
     SupplyChannel:
         Consortium: SampleConsortium
@@ -177,9 +177,9 @@ Profiles:
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Producer
+                - *Producer1
+                - *Producer2
                 - *Manufacturer
-                - *Deliverer
                 - *Retailer
             Capabilities:
                 <<: *ApplicationCapabilities

@@ -22,7 +22,7 @@ ARCH=$(uname -s | grep Darwin)
     OPTS="-i"
   fi
 cd $CURRENT_DIR
-cd ./supply-network/crypto-config/peerOrganizations/producer.example.com/ca/
+cd ./supply-network/crypto-config/peerOrganizations/producer1.example.com/ca/
 PRIV_KEY=$(ls *_sk)
 cd $CURRENT_DIR
 cd ./supply-network/base
@@ -37,7 +37,7 @@ sed $OPTS "s/CA2_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-base.yaml
 
 
 cd $CURRENT_DIR
-cd ./supply-network/crypto-config/peerOrganizations/deliverer.example.com/ca/
+cd ./supply-network/crypto-config/peerOrganizations/producer2.example.com/ca/
 PRIV_KEY=$(ls *_sk)
 cd $CURRENT_DIR
 cd ./supply-network/base

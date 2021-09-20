@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 app.post('/api/addTuna', async function (req, res) {
 
   try {
-    const contract = await fabricNetwork.connectNetwork('connection-producer.json', 'wallet/wallet-producer');
+    const contract = await fabricNetwork.connectNetwork('connection-producer1.json', 'wallet/wallet-producer1');
     let tuna = {
       id: req.body.id,
       latitude: req.body.latitude,
@@ -52,7 +52,7 @@ app.get('/api/getTuna/:id', async function (req, res) {
 app.post('/api/setPosition', async function (req, res) {
 
   try {
-    const contract = await fabricNetwork.connectNetwork('connection-deliverer.json', 'wallet/wallet-deliverer');
+    const contract = await fabricNetwork.connectNetwork('connection-producer2.json', 'wallet/wallet-producer2');
     let tx = await contract.submitTransaction('setPosition', req.body.id.toString(), req.body.latitude.toString(), req.body.longitude.toString());
     res.json({
       status: 'OK - Transaction has been submitted',

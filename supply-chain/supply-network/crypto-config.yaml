@@ -6,8 +6,8 @@ OrdererOrgs:
       - Hostname: orderer
 
 PeerOrgs:
-  - Name: Producer
-    Domain: producer.example.com
+  - Name: Producer1
+    Domain: producer1.example.com
     EnableNodeOUs: true
     Template:
       Count: 1
@@ -20,8 +20,8 @@ PeerOrgs:
       Count: 1
     Users:
       Count: 1
-  - Name: Deliverer
-    Domain: deliverer.example.com
+  - Name: Producer2
+    Domain: producer2.example.com
     EnableNodeOUs: true
     Template:
       Count: 1

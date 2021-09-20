@@ -7,13 +7,13 @@ version: '2'
 
 volumes:
   orderer.example.com:
-  peer0.producer.example.com:
+  peer0.producer1.example.com:
   peer0.manufacturer.example.com:
-  peer0.deliverer.example.com:
+  peer0.producer2.example.com:
   peer0.retailer.example.com:
-  caProducer:
+  caProducer1:
   caManufacturer:
-  caDeliverer:
+  caProducer2:
   caRetailer:
 
 networks:
@@ -29,11 +29,11 @@ services:
     networks:
       - byfn
 
-  peer0.producer.example.com:
-    container_name: peer0.producer.example.com
+  peer0.producer1.example.com:
+    container_name: peer0.producer1.example.com
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer0.producer.example.com
+      service: peer0.producer1.example.com
     networks:
       - byfn
 
@@ -44,15 +44,15 @@ services:
       service: peer0.manufacturer.example.com
     networks:
       - byfn
-      
-  peer0.deliverer.example.com:
-    container_name: peer0.deliverer.example.com
+
+  peer0.producer2.example.com:
+    container_name: peer0.producer2.example.com
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer0.deliverer.example.com
+      service: peer0.producer2.example.com
     networks:
       - byfn
-      
+
   peer0.retailer.example.com:
     container_name: peer0.retailer.example.com
     extends:
@@ -60,15 +60,15 @@ services:
       service: peer0.retailer.example.com
     networks:
       - byfn
-      
-  caProducer:
-    container_name: caProducer
+
+  caProducer1:
+    container_name: caProducer1
     extends:
       file:  base/docker-compose-base.yaml
-      service: caProducer
+      service: caProducer1
     networks:
       - byfn
-      
+
   caManufacturer:
     container_name: caManufacturer
     extends:
@@ -76,15 +76,15 @@ services:
       service: caManufacturer
     networks:
       - byfn
-      
-  caDeliverer:
-    container_name: caDeliverer
+
+  caProducer2:
+    container_name: caProducer2
     extends:
       file:  base/docker-compose-base.yaml
-      service: caDeliverer
+      service: caProducer2
     networks:
       - byfn
-      
+
   caRetailer:
     container_name: caRetailer
     extends:
@@ -92,8 +92,8 @@ services:
       service: caRetailer
     networks:
       - byfn
-      
-      
+
+
   cli:
     container_name: cli
     image: hyperledger/fabric-tools:$IMAGE_TAG
@@ -105,13 +105,13 @@ services:
       #- FABRIC_LOGGING_SPEC=DEBUG
       - FABRIC_LOGGING_SPEC=INFO
       - CORE_PEER_ID=cli
-      - CORE_PEER_ADDRESS=peer0.producer.example.com:7051
-      - CORE_PEER_LOCALMSPID=ProducerMSP
+      - CORE_PEER_ADDRESS=peer0.producer1.example.com:7051
+      - CORE_PEER_LOCALMSPID=Producer1MSP
       - CORE_PEER_TLS_ENABLED=true
-      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/producer.example.com/peers/peer0.producer.example.com/tls/server.crt
-      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/producer.example.com/peers/peer0.producer.example.com/tls/server.key
-      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/producer.example.com/peers/peer0.producer.example.com/tls/ca.crt
-      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/producer.example.com/users/Admin@producer.example.com/msp
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/producer1.example.com/peers/peer0.producer1.example.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/producer1.example.com/peers/peer0.producer1.example.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/producer1.example.com/peers/peer0.producer1.example.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/producer1.example.com/users/Admin@producer1.example.com/msp
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: /bin/bash
     volumes:
@@ -122,13 +122,13 @@ services:
         - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
     depends_on:
       - orderer.example.com
-      - peer0.producer.example.com
+      - peer0.producer1.example.com
       - peer0.manufacturer.example.com
-      - peer0.deliverer.example.com
+      - peer0.producer2.example.com
       - peer0.retailer.example.com
-      - caProducer
+      - caProducer1
       - caManufacturer
-      - caDeliverer
+      - caProducer2
       - caRetailer
     networks:
       - byfn

@@ -20,25 +20,25 @@ services:
     ports:
       - 7050:7050
 
-  peer0.producer.example.com:
-    container_name: peer0.producer.example.com
+  peer0.producer1.example.com:
+    container_name: peer0.producer1.example.com
     extends:
       file: peer-base.yaml
       service: peer-base
     environment:
-      - CORE_PEER_ID=peer0.producer.example.com
-      - CORE_PEER_ADDRESS=peer0.producer.example.com:7051
+      - CORE_PEER_ID=peer0.producer1.example.com
+      - CORE_PEER_ADDRESS=peer0.producer1.example.com:7051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.producer.example.com:7052
+      - CORE_PEER_CHAINCODEADDRESS=peer0.producer1.example.com:7052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.manufacturer.example.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.producer.example.com:7051
-      - CORE_PEER_LOCALMSPID=ProducerMSP
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.producer1.example.com:7051
+      - CORE_PEER_LOCALMSPID=Producer1MSP
     volumes:
         - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/producer.example.com/peers/peer0.producer.example.com/msp:/etc/hyperledger/fabric/msp
-        - ../crypto-config/peerOrganizations/producer.example.com/peers/peer0.producer.example.com/tls:/etc/hyperledger/fabric/tls
-        - peer0.producer.example.com:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/producer1.example.com/peers/peer0.producer1.example.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/producer1.example.com/peers/peer0.producer1.example.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.producer1.example.com:/var/hyperledger/production
     ports:
       - 7051:7051
 
@@ -54,7 +54,7 @@ services:
       - CORE_PEER_CHAINCODEADDRESS=peer0.manufacturer.example.com:9052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:9052
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.manufacturer.example.com:9051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.producer.example.com:9051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.producer1.example.com:9051
       - CORE_PEER_LOCALMSPID=ManufacturerMSP
     volumes:
         - /var/run/:/host/var/run/
@@ -64,25 +64,25 @@ services:
     ports:
       - 9051:9051
 
-  peer0.deliverer.example.com:
-    container_name: peer0.deliverer.example.com
+  peer0.producer2.example.com:
+    container_name: peer0.producer2.example.com
     extends:
       file: peer-base.yaml
       service: peer-base
     environment:
-      - CORE_PEER_ID=peer0.deliverer.example.com
-      - CORE_PEER_ADDRESS=peer0.deliverer.example.com:10051
+      - CORE_PEER_ID=peer0.producer2.example.com
+      - CORE_PEER_ADDRESS=peer0.producer2.example.com:10051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:10051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.deliverer.example.com:10052
+      - CORE_PEER_CHAINCODEADDRESS=peer0.producer2.example.com:10052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:10052
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.deliverer.example.com:10051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.producer.example.com:10051
-      - CORE_PEER_LOCALMSPID=DelivererMSP
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.producer2.example.com:10051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.producer1.example.com:10051
+      - CORE_PEER_LOCALMSPID=Producer2MSP
     volumes:
         - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/deliverer.example.com/peers/peer0.deliverer.example.com/msp:/etc/hyperledger/fabric/msp
-        - ../crypto-config/peerOrganizations/deliverer.example.com/peers/peer0.deliverer.example.com/tls:/etc/hyperledger/fabric/tls
-        - peer0.deliverer.example.com:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/producer2.example.com/peers/peer0.producer2.example.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/producer2.example.com/peers/peer0.producer2.example.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.producer2.example.com:/var/hyperledger/production
     ports:
       - 10051:10051
 
@@ -99,7 +99,7 @@ services:
       - CORE_PEER_CHAINCODEADDRESS=peer0.retailer.example.com:11052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:11052
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.retailer.example.com:11051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.producer.example.com:11051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.producer1.example.com:11051
       - CORE_PEER_LOCALMSPID=RetailerMSP
     volumes:
         - /var/run/:/host/var/run/
@@ -109,21 +109,21 @@ services:
     ports:
       - 11051:11051
 
-  caProducer:
+  caProducer1:
     image: hyperledger/fabric-ca:$IMAGE_TAG
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca-producer
+      - FABRIC_CA_SERVER_CA_NAME=ca-producer1
       - FABRIC_CA_SERVER_TLS_ENABLED=true
-      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.producer.example.com-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/1f71650ba6f66cd4d0d0b40297ce6cc708bee28cc33943840969607ac5448c4c_sk
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.producer1.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/f47f2678e08df227870c161d8187b9774f31c61970e4f88d6c76c44ba9adfab4_sk
       - FABRIC_CA_SERVER_PORT=7054
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/1f71650ba6f66cd4d0d0b40297ce6cc708bee28cc33943840969607ac5448c4c_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/f47f2678e08df227870c161d8187b9774f31c61970e4f88d6c76c44ba9adfab4_sk
     ports:
       - "7054:7054"
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.producer.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/1f71650ba6f66cd4d0d0b40297ce6cc708bee28cc33943840969607ac5448c4c_sk -b admin:adminpw -d'
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.producer1.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/f47f2678e08df227870c161d8187b9774f31c61970e4f88d6c76c44ba9adfab4_sk -b admin:adminpw -d'
     volumes:
-      - ../crypto-config/peerOrganizations/producer.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ../crypto-config/peerOrganizations/producer1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
 
   caManufacturer:
     image: hyperledger/fabric-ca:$IMAGE_TAG
@@ -132,30 +132,30 @@ services:
       - FABRIC_CA_SERVER_CA_NAME=ca-manufacturer
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.manufacturer.example.com-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/8c59eae94199d4a28d376a47bdab365600bf37580e4d2bf6b596e25af8434583_sk
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/26aa5616078b0f5cff8e36ffd134a15cea3794bf8da05d71c51c68d2e6adbbf8_sk
       - FABRIC_CA_SERVER_PORT=8054
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/8c59eae94199d4a28d376a47bdab365600bf37580e4d2bf6b596e25af8434583_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/26aa5616078b0f5cff8e36ffd134a15cea3794bf8da05d71c51c68d2e6adbbf8_sk
     ports:
       - "8054:8054"
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.manufacturer.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/8c59eae94199d4a28d376a47bdab365600bf37580e4d2bf6b596e25af8434583_sk -b admin:adminpw -d'
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.manufacturer.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/26aa5616078b0f5cff8e36ffd134a15cea3794bf8da05d71c51c68d2e6adbbf8_sk -b admin:adminpw -d'
     volumes:
       - ../crypto-config/peerOrganizations/manufacturer.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
 
-  caDeliverer:
+  caProducer2:
     image: hyperledger/fabric-ca:$IMAGE_TAG
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca-deliverer
+      - FABRIC_CA_SERVER_CA_NAME=ca-producer2
       - FABRIC_CA_SERVER_TLS_ENABLED=true
-      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.deliverer.example.com-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/e310472effa7ee8bf4ffa281f59a41811be7c3610a7c69895740214375ff653e_sk
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.producer2.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/721eb767ffc928723224982099d9b7176513b0b987c2242ae3e57b49a6512ed5_sk
       - FABRIC_CA_SERVER_PORT=9054
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/e310472effa7ee8bf4ffa281f59a41811be7c3610a7c69895740214375ff653e_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/721eb767ffc928723224982099d9b7176513b0b987c2242ae3e57b49a6512ed5_sk
     ports:
       - "9054:9054"
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.deliverer.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/e310472effa7ee8bf4ffa281f59a41811be7c3610a7c69895740214375ff653e_sk -b admin:adminpw -d'
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.producer2.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/721eb767ffc928723224982099d9b7176513b0b987c2242ae3e57b49a6512ed5_sk -b admin:adminpw -d'
     volumes:
-      - ../crypto-config/peerOrganizations/deliverer.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ../crypto-config/peerOrganizations/producer2.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
 
 
   caRetailer:
@@ -165,11 +165,11 @@ services:
       - FABRIC_CA_SERVER_CA_NAME=ca-retailer
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.retailer.example.com-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/e9470b91366245d8462f9d70865f57ec6e875f68817097ac769c6990678ec934_sk
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/316fe81a97cc88d173f6a2df7f6dc9d0d44b23a257cf5f485370bc4e973bf403_sk
       - FABRIC_CA_SERVER_PORT=10054
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/e9470b91366245d8462f9d70865f57ec6e875f68817097ac769c6990678ec934_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/316fe81a97cc88d173f6a2df7f6dc9d0d44b23a257cf5f485370bc4e973bf403_sk
     ports:
       - "10054:10054"
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.retailer.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/e9470b91366245d8462f9d70865f57ec6e875f68817097ac769c6990678ec934_sk -b admin:adminpw -d'
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.retailer.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/316fe81a97cc88d173f6a2df7f6dc9d0d44b23a257cf5f485370bc4e973bf403_sk -b admin:adminpw -d'
     volumes:
       - ../crypto-config/peerOrganizations/retailer.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
