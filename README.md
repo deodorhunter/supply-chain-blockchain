@@ -20,7 +20,9 @@ Master branch should have retained the binaries. If not, we need to add a bash s
 
 Once you are all set with requirements, just clone this repo under your home path and run
 ```
-  cd supply-chain-blockchain/supply-chain
+  git clone https://github.com/deodorhunter/supply-chain-blockchain.git
+  (or ssh equivalent git@github.com:deodorhunter/supply-chain-blockchain.git)
+  cd supply-chain-blockchain/supply-network
   ./network.sh install
   ./network.sh start
 ```
