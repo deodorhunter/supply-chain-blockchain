@@ -22,7 +22,7 @@ Once you are all set with requirements, just clone this repo under your home pat
 ```
   git clone https://github.com/deodorhunter/supply-chain-blockchain.git
   (or ssh equivalent git@github.com:deodorhunter/supply-chain-blockchain.git)
-  cd supply-chain-blockchain/supply-network
+  cd supply-chain-blockchain/supply-chain/supply-network
   ./network.sh install
   ./network.sh start
 ```
