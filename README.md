@@ -14,7 +14,7 @@ It's recommended to use  [nvm](https://github.com/nvm-sh/nvm), a node versions m
 
 Information regarding basic usage of docker can be found at [Docker documentation](https://docs.docker.com/), basic knowledge of [container composing](https://docs.docker.com/compose/) is required to understand the scripts and the YAML configuration files used to bring up the network.
 
-Master branch should have retained the binaries. If not, we need to add a bash script that retrieves them. (develop branch has bin folder gitignored)
+Develop branch should have retained the binaries. If not, we need to add a bash script that retrieves them. (master branch has bin folder gitignored)
 
 ## Installing and running the PoC blockchain
 
