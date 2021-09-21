@@ -10,7 +10,7 @@ This project is loosely based on [this tutorial](https://medium.com/coinmonks/cr
 
 It is required to have Docker an git installed on your machine, as well as [node](https://nodejs.org/en/download/) and [yarn](https://classic.yarnpkg.com/en/docs/getting-started)
 It's recommended to use of [nvm](https://github.com/nvm-sh/nvm), a node versions manager tool. Use lts versions (>=10, >=12 have been tested and are fully working).
-Information regarding basic usage of docker can be found at [Docker documentation](https://docs.docker.com/), basic knowledge of (container composing)[https://docs.docker.com/compose/] is required to understand the scripts and the YAML configuration files used to bring up the network.
+Information regarding basic usage of docker can be found at [Docker documentation)(https://docs.docker.com/), basic knowledge of [container composing](https://docs.docker.com/compose/) is required to understand the scripts and the YAML configuration files used to bring up the network.
 
 Master branch should have retained the binaries. If not, we need to add a bash script that retrieves them. (develop branch has bin folder gitignored)
 
