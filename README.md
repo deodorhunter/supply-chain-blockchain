@@ -4,7 +4,7 @@
 
 Please read the [documentation](https://hyperledger-fabric.readthedocs.io/en/release-1.4/) to understand the basic concepts of Hyperledger Fabric Framework.
 
-This project is loosely based on [this tutorial])https://medium.com/coinmonks/creating-a-hyperledger-fabric-network-from-scratch-part-i-designing-the-network-23d803bbdb61). It's recommended to skim it (lots of code dumps) to understand the basic concepts and the implementation, and useful for developing the actual use cases needed to complete this project.
+This project is loosely based on [this tutorial](https://medium.com/coinmonks/creating-a-hyperledger-fabric-network-from-scratch-part-i-designing-the-network-23d803bbdb61). It's recommended to skim it (lots of code dumps) to understand the basic concepts and the implementation, and useful for developing the actual use cases needed to complete this project.
 
 ## Requirements
 
