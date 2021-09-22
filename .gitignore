@@ -6,6 +6,5 @@
 .*.sw*
 # installed platform-specific binaries
 
-/config
 .DS_Store
 .project

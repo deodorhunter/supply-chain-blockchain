@@ -1,5 +1,7 @@
 #!/bin/bash
-echo "Creating channel..."
+echo "***********************************"
+echo "       Creating channel         "
+echo "***********************************"
 ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 CORE_PEER_LOCALMSPID=Producer1MSP
 CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/producer1.example.com/peers/peer0.producer1.example.com/tls/ca.crt
@@ -16,4 +18,5 @@ cat log.txt
 
 echo
 echo "Channel created, joining Producer1..."
+echo
 peer channel join -b mychannel.block

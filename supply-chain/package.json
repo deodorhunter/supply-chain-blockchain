@@ -1,21 +1,46 @@
 {
-    "name": "hlf1.4-supply-chain",
+    "name": "supply-chain",
     "version": "1.0.0",
     "description": "A supply network example in Hyperledger Fabric 1.4",
-    "homepage": "https://github.com/ialberquilla/hlf1.4-supply-chain#readme",
     "engines": {
         "node": ">=8",
         "npm": ">=5"
     },
     "scripts": {
-        "lint": "eslint .",
-        "pretest": "npm run lint",
         "start": "node src/server/server.js",
         "test": "nyc mocha --recursive"
     },
-    "engineStrict": true,
-    "author": "Iván Alberquilla",
-    "license": "Apache-2.0",
+    "stylelint": {
+        "extends": [
+          "stylelint-config-recommended",
+          "stylelint-config-css-modules",
+          "stylelint-prettier/recommended",
+          "stylelint-config-idiomatic-order"
+        ],
+        "plugins": [
+          "stylelint-prettier"
+        ],
+        "rules": {
+          "prettier/prettier": [
+            true,
+            {
+              "tabWidth": 4
+            }
+          ],
+          "at-rule-no-unknown": [
+            true,
+            {
+              "ignoreAtRules": [
+                "extend",
+                "include",
+                "mixin"
+              ]
+            }
+          ]
+        }
+    },
+    "author": "",
+    "license": "",
     "dependencies": {
         "arraybuffer-to-string": "^1.0.2",
         "express": "^4.17.1",
@@ -29,7 +54,16 @@
         "mocha": "^5.2.0",
         "nyc": "^13.1.0",
         "sinon": "^7.1.1",
-        "sinon-chai": "^3.3.0"
+        "sinon-chai": "^3.3.0",
+        "eslint-config-prettier": "^6.9.0",
+        "eslint-plugin-prettier": "^3.1.2",
+        "prettier": "^1.19.1",
+        "stylelint": "^12.0.1",
+        "stylelint-config-css-modules": "^2.1.0",
+        "stylelint-config-idiomatic-order": "^8.1.0",
+        "stylelint-config-prettier": "^8.0.0",
+        "stylelint-config-recommended": "^3.0.0",
+        "stylelint-prettier": "^1.1.2"
     },
     "nyc": {
         "exclude": [
